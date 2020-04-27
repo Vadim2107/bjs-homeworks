@@ -20,31 +20,25 @@ function getResult(a,b,c){
 function getAverageMark(marks){
     
     let sum = 0;
-    let averageMark;
+    let averageMark;    
     
-    if (marks.length == 0) {
-        averageMark = 0;
-    } else if (marks.length <= 5) {
-        for (let i = 0; i < marks.length; ++i) {
-            sum += marks[i];
-        }       
-        averageMark = sum / marks.length;    
-    } else if (marks.length > 5) {
+    if (marks.length > 5) {
         console.log('Количество оценок больше 5');
         marks = marks.slice(0, 5);
-        for (let i = 0; i < marks.length; ++i) {
-            sum += marks[i];
-        }
-        averageMark = sum / marks.length;
+    } else if (marks.length == 0) {
+        return 0;
     }
     
+    for (let i = 0; i < marks.length; ++i) {
+        sum += marks[i];
+        averageMark = sum / marks.length;
+    }
+
     return averageMark;
 }
 
-function askDrink(name, dateOfBirthday){
-    let year = new Date().getFullYear();
-    let yearOfBirthday = dateOfBirthday.getFullYear();
-    let age = year - yearOfBirthday;
+function askDrink(name, dateOfBirthday){    
+    let age = new Date().getFullYear() - dateOfBirthday.getFullYear();
     let result;
 
     if (age >= 18) {
