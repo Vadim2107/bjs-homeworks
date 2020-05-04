@@ -1,7 +1,7 @@
 function getSolutions(a, b, c) {
     'use strict';
 
-    const D = b ** 2 - 4 * a * c;    
+    const D = b ** 2 - 4 * a * c;
 
     if (D < 0) {
         return {
@@ -49,7 +49,7 @@ function getAverageMark(marks) {
             sum += marks[i];
         }
 
-        averageMark = sum / marks.length;    
+        averageMark = sum / marks.length;
     }
 
     return averageMark;
@@ -60,18 +60,17 @@ function getAverageScore(data) {
     let sumAverageMarks = 0;
     let totalAverageMarks = 0;
 
-    for (let subject in data) {        
+    for (let subject in data) {
         averageResult[subject] = getAverageMark(data[subject]);
         
         sumAverageMarks += averageResult[subject];
         totalAverageMarks++;
-        // console.log(`${subject}: ${averageResult[subject]}`);            
     }
     
     if (sumAverageMarks == 0) {
         averageResult.average = 0;
     } else {
-        averageResult.average = sumAverageMarks / totalAverageMarks;       
+        averageResult.average = sumAverageMarks / totalAverageMarks;
     }
 
     return averageResult;
@@ -87,13 +86,7 @@ function getDecodedValue(secret) {
 
 function getPersonData(secretData) {
 
-    let personData = {
-        // firstName: '',
-        // lastName: ''
-    };
-
-    
-    // let result = '';
+    let personData = {};
 
     for (let prop in secretData) {
         personData[prop] = getDecodedValue(secretData[prop]);
@@ -106,5 +99,4 @@ function getPersonData(secretData) {
     delete personData.bbb;
     
     return personData;
-    // return secretData;
 }
