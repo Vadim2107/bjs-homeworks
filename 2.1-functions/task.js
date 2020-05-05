@@ -57,21 +57,24 @@ function getAverageMark(marks) {
 
 function getAverageScore(data) {
     let averageResult = {};
-    let sumAverageMarks = 0;
-    let totalAverageMarks = 0;
+    // let sumAverageMarks = 0; // первый вариант
+    // let totalAverageMarks = 0; // первый вариант
+    averageResult.average = []; // второй вариант 
 
     for (let subject in data) {
         averageResult[subject] = getAverageMark(data[subject]);
         
-        sumAverageMarks += averageResult[subject];
-        totalAverageMarks++;
+        averageResult.average.push(averageResult[subject]); // второй вариант
+        // sumAverageMarks += averageResult[subject]; // первый вариант
+        // totalAverageMarks++; // первый вариант
     }
+    averageResult.average = getAverageMark(averageResult.average); // второй вариант
     
-    if (sumAverageMarks == 0) {
-        averageResult.average = 0;
-    } else {
-        averageResult.average = sumAverageMarks / totalAverageMarks;
-    }
+    // if (sumAverageMarks == 0) { // первый вариант
+    //     averageResult.average = 0;
+    // } else {
+    //     averageResult.average = sumAverageMarks / totalAverageMarks;
+    // }
 
     return averageResult;
 }
