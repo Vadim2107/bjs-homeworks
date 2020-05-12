@@ -184,7 +184,7 @@ console.log(log.addGrade(3, 'algebra')); // 1
 // console.log(log.addGrade('отлично!', 'math'));
 // Вы пытались поставить оценку "отлично!" по предмету "math". Допускаются только числа от 1 до 5.
 // 0
-console.log(log.addGrade(4, 'algebra')); // 2
+// console.log(log.addGrade(4, 'algebra')); // 2
 // console.log(log.addGrade(5, 'geometry')); // 1
 // console.log(log.addGrade(25, 'geometry'));
 // Вы пытались поставить оценку "25" по предмету "geometry". Допускаются только числа от 1 до 5.
