@@ -7,9 +7,10 @@ function getAnimalSound(animal) {
     
     const sound = animal.sound;
 
-    if (animal !== undefined) {
-        return sound;
-    }    
+    // if (animal !== undefined) {
+    //     return sound;
+    // }
+    return sound;    
 }
 
 function getAverageMark(marks) {
@@ -23,7 +24,7 @@ function getAverageMark(marks) {
         return 0
     } else {
         for (let i = 0; i < marks.length; i++) {
-            sum += Number(marks[i]);
+            sum += parseFloat(marks[i]);            
         }
 
         average = sum / marks.length;
@@ -36,18 +37,19 @@ function getAverageMark(marks) {
 function checkBirthday(birthday) {
     'use strict';
 
-    birthday = +new Date(birthday);
+    let day = +new Date(birthday);
 
     let now = Date.now();
-    let diff = now - birthday;    
+    let diff = now - day;    
     let age = Math.floor(diff / (365.25  * 24 * 3600 * 1000 ));
-    let verdict;
+    // let verdict;
 
-    if (age >= 18) {
-        verdict = true;
-    } else {
-        verdict = false;
-    }
+    // if (age >= 18) {
+    //     verdict = true;
+    // } else {
+    //     verdict = false;
+    // }
 
-    return verdict;
+    // return verdict;
+    return age >= 18;
 }
