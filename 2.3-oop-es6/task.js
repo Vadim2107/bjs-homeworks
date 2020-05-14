@@ -114,13 +114,6 @@ class StormStaff extends Staff {
     }    
 }
 
-// const oldSword = new Weapon({
-//     name: 'Старый меч',
-//     attack: 20,
-//     durability: 10,
-//     range: 1,
-// });
-
 const arm = new Arm();    
 
 const bow = new Bow();    
@@ -142,6 +135,8 @@ const stormStaff = new StormStaff();
 class StudentLog {
     constructor(name) {
         this.name = name;
+        this.data = {};
+        this.marks = [];        
     }
 
     getName() {
@@ -149,43 +144,57 @@ class StudentLog {
     }
 
     addGrade(grade, subject) {
-        let amountGrade = [];
-        amountGrade.push(grade);
+        this.marks.push(grade);        
 
-        
-
-        for (let i = 0; i < amountGrade.length; i++) {
-            if (grade > 5 || grade <= 0 || isFinite(grade) == false) {
-                console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`);
-                return amountGrade.length = 0;
-            }
-
-            return amountGrade.length;            
+        if (this.data.hasOwnProperty(subject) == true) {
+            this.data[subject].push(grade);            
+        } else {
+            this.data[subject] = [];
+            this.data[subject].push(grade);
         }
 
-        // return amountGrade.length;
-        // return amountGrade;
+        if (grade > 5 || grade <= 0 || isFinite(grade) == false) {
+            console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5.`);
+            
+            this.marks.pop(grade);
+            this.data[subject].pop(grade);            
+        }
+
+        return this.data[subject].length;        
     }
 
     getAverageBySubject(subject) {
+        if (this.data.hasOwnProperty(subject) == false) {
+            return 0;
+        }
 
+        let sum = 0;
+        let averageBySubject;
+        
+        if (this.data[subject].length == 0) {
+            return 0
+        } else {
+            for (let i = 0; i < this.data[subject].length; i++) {                
+                sum += this.data[subject][i];
+            }
+            averageBySubject = sum / this.data[subject].length;            
+        }
+        
+        return averageBySubject;
     }
 
     getTotalAverage() {
+        let sumTotal = 0;
+        let averageTotal;
 
-    }
+        for (let i = 0; i < this.marks.length; i++) {
+            sumTotal += this.marks[i];
+        }
+
+        averageTotal = sumTotal / this.marks.length;
+        return averageTotal;
+    }    
 }
 
 const log = new StudentLog('Олег Никифоров');
-// console.log(log.name);
-// console.log(log.getName()) // Олег Никифоров
-
-console.log(log.addGrade(3, 'algebra')); // 1
-// console.log(log.addGrade('отлично!', 'math'));
-// Вы пытались поставить оценку "отлично!" по предмету "math". Допускаются только числа от 1 до 5.
-// 0
-// console.log(log.addGrade(4, 'algebra')); // 2
-// console.log(log.addGrade(5, 'geometry')); // 1
-// console.log(log.addGrade(25, 'geometry'));
-// Вы пытались поставить оценку "25" по предмету "geometry". Допускаются только числа от 1 до 5.
-// 1
+const student = new StudentLog('Вадим Зиновьев');
