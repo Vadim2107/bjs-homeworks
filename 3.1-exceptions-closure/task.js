@@ -2,8 +2,7 @@
 
 function parseCount(value) {
     if (isNaN(value)) {
-        const valueError = new Error('Невалидное значение');
-        throw valueError;
+        throw new Error('Невалидное значение');        
     }
 
     return parseInt(value);    
@@ -11,10 +10,7 @@ function parseCount(value) {
 
 function validateCount(value) {    
     try {
-        if (isNaN(value)) {
-            const valueError = new Error('Невалидное значение');
-            throw valueError;
-        }
+        parseCount(value);        
         return parseInt(value); 
     } catch (err) {
         return err;
@@ -24,37 +20,43 @@ function validateCount(value) {
 //  Задача 2
 
 class Triangle {
+    
     constructor(a, b, c) {
         this.a = a;
         this.b = b;
         this.c = c;
-        this.sumAb = this.a + this.b;
-        this.sumAc = this.a + this.c;
-        this.sumBc = this.b + this.c;
+        const sumAb = this.a + this.b;
+        const sumAc = this.a + this.c;
+        const sumBc = this.b + this.c;
 
-        if (this.sumAb <= this.c || this.sumAc <= this.b || this.sumBc <= this.a) {
-            const valueErr = new Error('Треугольник с такими сторонами не существует');
-            throw valueErr;
+        if (sumAb <= this.c || sumAc <= this.b || sumBc <= this.a) {
+            throw new Error('Треугольник с такими сторонами не существует');            
         }
-    }
+    }    
     
     getPerimeter() {
-        const perimeter = this.a + this.b + this.c;
-        return perimeter;
+        return this.a + this.b + this.c;
     }
 
-    getArea() {
-        const p = (this.a + this.b + this.c) / 2;
+    // getPerimeter = () => this.a + this.b + this.c;
+    
+    getArea () {
+        const p = (this.a + this.b + this.c) / 2;        
         const area = (p * (p - this.a) * (p - this.b) * (p - this.c)) ** (1 / 2);
         return parseFloat(area.toFixed(3));
     }
+
+    // getArea = () => {
+    //     const p = (this.a + this.b + this.c) / 2;        
+    //     const area = (p * (p - this.a) * (p - this.b) * (p - this.c)) ** (1 / 2);
+    //     return parseFloat(area.toFixed(3));
+    // }
 }
 
 function getTriangle(a, b, c) {
 
     try {
-        const triangle = new Triangle(a, b, c);
-        return triangle;
+        return new Triangle(a, b, c);        
     } catch (error) {
         return {
             getPerimeter() {                
