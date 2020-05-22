@@ -25,7 +25,7 @@ function memorize(fn, limit) { // Функция оптимизации
     let memory = [];    
 
     return function (...args) {
-        let obj = {};
+        let obj = {};        
         
         /* С помощью функции find ищем в массиве memory, объект, у которого
         в свойстве args находится такой же массив, как и массив аргументов
@@ -38,14 +38,14 @@ function memorize(fn, limit) { // Функция оптимизации
 
         obj.args = args;
         obj.result = fn(...args);
-        memory.push(obj);       
-
+        memory.push(obj);
+        
         if (memory.length > limit) {
-            memory.shift(obj);
+            memory.shift();
         }
 
-        // console.log(memory);
-        return fn(...args);
+        // console.log(memory);        
+        return obj.result;
     }    
 }
 
@@ -55,7 +55,7 @@ function testCase(testFunction, nameTimer) {
     const testArray = [[1,2,3], [1,2], [1,2,3], [1,2], [9,5,2,4]];
     
     console.time(nameTimer);
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 100; i++) {
 // Разделение массива аргументов на аргументы и применение тестовой функции к аргументам
         testArray.forEach((arr) => testFunction(...arr));
         // testArray.forEach((arr) => testFunction.apply(null, arr); // или так
@@ -67,13 +67,13 @@ function testCase(testFunction, nameTimer) {
 /* С задержкой времени:
 
 testCase(sum, 'timer_1');
-timer_1: 50050.864990234375ms
+timer_1: 500501.97900390625ms
 testCase(mSum, 'timer_2');
-timer_2: 6005.81591796875ms
+timer_2: 3003.97900390625ms
 
 Без задержки времени:
 
 testCase(sum, 'timer_1');
-timer_1: 0.1748046875ms
+timer_1: 0.328125ms
 testCase(mSum, 'timer_2');
-timer_2: 0.36083984375ms */
+timer_2: 0.647705078125ms */
